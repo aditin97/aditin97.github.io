@@ -214,7 +214,8 @@ header h1 {
   overflow: hidden;
 }
 
-#add-table-btn {
+#add-table-btn,
+#export-btn {
   background: var(--pink-500);
   color: white;
   border: none;
@@ -227,8 +228,17 @@ header h1 {
   transition: background 0.2s;
 }
 
-#add-table-btn:hover {
+#add-table-btn:hover,
+#export-btn:hover {
   background: var(--pink-600);
+}
+
+#export-btn {
+  background: var(--rose-gold);
+}
+
+#export-btn:hover {
+  background: #9a5b64;
 }
 
 #tables-grid {

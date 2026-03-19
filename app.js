@@ -17,6 +17,7 @@
   const searchInput     = document.getElementById("search-input");
   const tablesGrid      = document.getElementById("tables-grid");
   const addTableBtn     = document.getElementById("add-table-btn");
+  const exportBtn       = document.getElementById("export-btn");
 
   // ── File Upload ────────────────────────────────
   uploadArea.addEventListener("click", () => fileInput.click());
@@ -242,6 +243,31 @@
   guestsContainer.addEventListener("dragenter", handleDragEnter);
   guestsContainer.addEventListener("dragleave", handleDragLeave);
   guestsContainer.addEventListener("drop", handleDrop);
+
+  // ── Export to Excel ────────────────────────────
+  exportBtn.addEventListener("click", exportToExcel);
+
+  function exportToExcel() {
+    const rows = [["Guest Name", "Table"]];
+
+    tables.forEach((t) => {
+      const seated = guests.filter((g) => g.table === t.id);
+      seated.forEach((g) => {
+        rows.push([g.name, t.name]);
+      });
+    });
+
+    const unassigned = guests.filter((g) => g.table === null);
+    unassigned.forEach((g) => {
+      rows.push([g.name, "Unassigned"]);
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws["!cols"] = [{ wch: 30 }, { wch: 20 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Seating Chart");
+    XLSX.writeFile(wb, "seating-chart.xlsx");
+  }
 
   // ── Search ─────────────────────────────────────
   searchInput.addEventListener("input", renderGuestList);
