@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💒 Wedding Seating Chart</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>💍 Wedding Seating Chart</h1>
+    <p class="subtitle">Upload your guest list &amp; drag names to tables</p>
+  </header>
+
+  <main>
+    <!-- Upload Area -->
+    <section id="upload-section">
+      <div id="upload-area">
+        <div class="upload-icon">📂</div>
+        <p>Drag &amp; drop an Excel file here<br/>or <label for="file-input" class="file-label">browse</label></p>
+        <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden />
+      </div>
+    </section>
+
+    <!-- Main Content: Guest List + Tables -->
+    <div id="workspace" class="hidden">
+      <!-- Guest List Sidebar -->
+      <aside id="guest-list">
+        <div class="panel-header">
+          <h2>👫 Guests</h2>
+          <span id="guest-count" class="badge">0</span>
+        </div>
+        <div id="search-box">
+          <input type="text" id="search-input" placeholder="🔍 Search guests..." />
+        </div>
+        <div id="guests-container" class="drop-zone" data-table="unassigned">
+          <!-- guest cards rendered here -->
+        </div>
+      </aside>
+
+      <!-- Tables Area -->
+      <section id="tables-area">
+        <div class="panel-header">
+          <h2>🪑 Tables</h2>
+          <button id="add-table-btn">+ Add Table</button>
+        </div>
+        <div id="tables-grid">
+          <!-- table cards rendered here -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with 💖 for your special day</p>
+  </footer>
+
+  <script src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

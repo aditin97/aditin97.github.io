@@ -1,0 +1,348 @@
+/* ── Fonts & Reset ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@400;600;700&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink-50:  #fdf2f8;
+  --pink-100: #fce7f3;
+  --pink-200: #fbcfe8;
+  --pink-300: #f9a8d4;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --pink-600: #db2777;
+  --rose-gold: #b76e79;
+  --cream:    #fffbf5;
+  --text:     #4a3045;
+  --text-light: #8b7085;
+  --white:    #ffffff;
+  --shadow:   0 2px 12px rgba(183, 110, 121, 0.15);
+  --shadow-lg: 0 8px 30px rgba(183, 110, 121, 0.2);
+  --radius:   16px;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, var(--pink-50) 0%, var(--cream) 50%, var(--pink-100) 100%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ───────────────────────────────────── */
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--pink-600);
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  margin-top: 0.3rem;
+}
+
+/* ── Upload Section ───────────────────────────── */
+#upload-section {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#upload-area {
+  border: 3px dashed var(--pink-300);
+  border-radius: var(--radius);
+  background: var(--white);
+  padding: 3rem 4rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+
+#upload-area:hover,
+#upload-area.drag-over {
+  border-color: var(--pink-500);
+  background: var(--pink-50);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+#upload-area p {
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.file-label {
+  color: var(--pink-500);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+}
+
+/* ── Workspace ────────────────────────────────── */
+#workspace {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem 2rem;
+  flex: 1;
+  min-height: 0;
+}
+
+#workspace.hidden {
+  display: none;
+}
+
+/* ── Guest List Sidebar ───────────────────────── */
+#guest-list {
+  width: 280px;
+  min-width: 280px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-bottom: 2px solid var(--pink-100);
+}
+
+.panel-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--pink-600);
+}
+
+.badge {
+  background: var(--pink-400);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 99px;
+}
+
+#search-box {
+  padding: 0.75rem 1rem;
+}
+
+#search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--pink-200);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#search-input:focus {
+  border-color: var(--pink-400);
+}
+
+#guests-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1rem 1rem;
+  min-height: 100px;
+}
+
+#guests-container.drop-hover {
+  background: var(--pink-50);
+}
+
+/* ── Guest Card ───────────────────────────────── */
+.guest-card {
+  background: linear-gradient(135deg, var(--pink-50), var(--white));
+  border: 2px solid var(--pink-200);
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  margin-bottom: 0.45rem;
+  cursor: grab;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.guest-card:hover {
+  border-color: var(--pink-400);
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(244, 114, 182, 0.2);
+}
+
+.guest-card.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+/* ── Tables Area ──────────────────────────────── */
+#tables-area {
+  flex: 1;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#add-table-btn {
+  background: var(--pink-500);
+  color: white;
+  border: none;
+  padding: 0.45rem 1.1rem;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#add-table-btn:hover {
+  background: var(--pink-600);
+}
+
+#tables-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  align-content: start;
+}
+
+/* ── Table Card ───────────────────────────────── */
+.table-card {
+  background: var(--cream);
+  border: 2px solid var(--pink-200);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.table-card.drop-hover {
+  border-color: var(--pink-500);
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(135deg, var(--pink-200), var(--pink-100));
+}
+
+.table-header input {
+  background: transparent;
+  border: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  width: 60%;
+  outline: none;
+}
+
+.table-header input::placeholder {
+  color: var(--text-light);
+}
+
+.table-header .table-count {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.table-header .remove-table-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--rose-gold);
+  padding: 0 0.25rem;
+  transition: color 0.2s;
+}
+
+.table-header .remove-table-btn:hover {
+  color: var(--pink-600);
+}
+
+.table-seats {
+  min-height: 60px;
+  padding: 0.6rem 0.8rem;
+}
+
+.table-seats .guest-card {
+  background: var(--white);
+}
+
+.table-seats .empty-msg {
+  color: var(--text-light);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 0.8rem 0;
+  font-style: italic;
+}
+
+/* ── Footer ───────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1.2rem;
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pink-50);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pink-300);
+  border-radius: 99px;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  #workspace {
+    flex-direction: column;
+  }
+  #guest-list {
+    width: 100%;
+    min-width: unset;
+    max-height: 300px;
+  }
+}
